@@ -1,5 +1,5 @@
-from multiprocessing import pool
-from time import sleep
+
+
 
 s = int(input("Ввеедите количество рядов"))  
 c = int(input("Введите количество столбцов"))  
