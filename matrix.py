@@ -1,40 +1,30 @@
-from multiprocessing import Pool
+import sys
+from multiprocessing import Pool    #cd Desktop\exercise
+                                    #python multyp.py 2 3 1 2 3 4 5 6
+def summ(m: list) -> int:
+    return sum(m)
 
-s=0
-c=0
-mat = [0]
+def main() -> None:
 
-def create(_s, _c):
-    global s
-    global c
-    global mat
-    s=_s
-    c=_c
-    _mat = []
-    for i in range (s):
+    s=int(sys.argv[1]) #для строг - string
+    c=int(sys.argv[2]) #для столбцов -  colums
+    mat = []
+
+    for i in range (int(s)):
         m=[]
-        for j in range (c):
-            m.append(int(input()))
-        _mat.append(m)
-    mat=_mat
-    return mat
+        for j in range (int(c)):
+            m.append(int(sys.argv[i*int(c)+j+3]))
+        mat.append(m)
 
-def printf():
-    for i in range (s):
+    for i in range (s): #вывод для проверки
         for j in range (c):
-            print(mat[i][j], end = " ")
+            print(mat[i][j], end = " ") 
         print()
 
+    sumt = [] #временная сумма, sum temp, в ней будет список сумм по рядам
 
-def parsumm():
     with Pool(s) as p:
-        st=[]
-        for i in range (s):
-            st.append(i)
-        print(p.map(summ,st))
+        sumt += p.map(summ, mat)
 
-def summ(x):
-    sumtemp = 0
-    for i in range (c):
-        sumtemp+=mat[x][i]
-    return sumtemp
+    for i in range (int(s)):
+        print(sumt[i])
